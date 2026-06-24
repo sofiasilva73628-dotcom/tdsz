@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ki‑Lojão Brinquedos e Bazar LTDA – Loja de Brinquedos no Rio de Janeiro</title>
+  <meta name="description" content="A Ki‑Lojão é a loja de brinquedos e bazar que encanta famílias no Rio. Bonecos, jogos, pelúcias, educativos e muito mais. Entrega rápida e embalagem para presente grátis.">
+  <meta name="robots" content="index, follow">
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #333; line-height: 1.6; }
+    :root {
+      --azul-piscina: #38B6FF;
+      --azul-profundo: #1A3E6F;
+      --amarelo-sol: #FFC107;
+      --laranja-divertido: #FF8C42;
+      --verde-limao: #A5D63E;
+      --branco: #FFFFFF;
+      --off-white: #F7F9FC;
+      --cinza-claro: #EAEEF3;
+      --cinza-escuro: #2B2D2F;
+      --sombra-suave: 0 8px 20px rgba(0,0,0,0.05);
+      --borda-arredondada: 24px;
+    }
+    h1, h2, h3, .titulo-display { font-family: 'Baloo 2', cursive; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .btn {
+      display: inline-block; padding: 14px 32px; border-radius: 40px; font-weight: 700; text-decoration: none;
+      transition: all 0.3s ease; cursor: pointer; border: none; font-size: 1rem;
+    }
+    .btn-laranja { background: var(--laranja-divertido); color: #fff; box-shadow: 0 4px 12px rgba(255,140,66,0.3); }
+    .btn-laranja:hover { background: #e67a35; transform: scale(1.05); box-shadow: 0 8px 20px rgba(255,140,66,0.4); }
+    .btn-outline { background: transparent; border: 2px solid #fff; color: #fff; }
+    .btn-outline:hover { background: #fff; color: var(--azul-profundo); }
+    /* Header */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 20px 0;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    header.scrolled { background: rgba(255,255,255,0.85); backdrop-filter: blur(15px); box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .header-container { display: flex; align-items: center; justify-content: space-between; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .logo img { height: 50px; }
+    .nav-menu { display: flex; gap: 28px; list-style: none; }
+    .nav-menu a {
+      text-decoration: none; color: #fff; font-weight: 600; position: relative; padding: 5px 0;
+      transition: color 0.3s;
+    }
+    header.scrolled .nav-menu a { color: #333; }
+    .nav-menu a:hover { color: var(--laranja-divertido); }
+    .nav-menu a::after {
+      content: ''; position: absolute; bottom: -2px; left: 50%; width: 0; height: 2px;
+      background: var(--laranja-divertido); transition: all 0.3s; transform: translateX(-50%);
+    }
+    .nav-menu a:hover::after { width: 100%; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 28px; height: 3px; background: #fff; border-radius: 3px; transition: 0.3s; }
+    header.scrolled .hamburger span { background: #333; }
+    .mobile-menu {
+      position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); display: flex;
+      flex-direction: column; align-items: center; justify-content: center;
+      transition: left 0.4s ease; z-index: 999;
+    }
+    .mobile-menu.active { left: 0; }
+    .mobile-menu a { font-size: 1.8rem; color: #333; margin: 18px 0; text-decoration: none; font-weight: 700; }
+    /* Hero Swiper */
+    .hero { height: 100vh; position: relative; }
+    .swiper { width: 100%; height: 100%; }
+    .swiper-slide {
+      display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center;
+      position: relative;
+    }
+    .slide-overlay {
+      position: absolute; inset: 0; background: linear-gradient(135deg, rgba(26,62,111,0.7) 0%, rgba(26,62,111,0.2) 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+      padding: 20px;
+    }
+    .slide-content h1 { font-size: 3.5rem; color: #fff; margin-bottom: 16px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    .slide-content p { font-size: 1.3rem; color: #fff; margin-bottom: 32px; }
+    .swiper-pagination-bullet { background: #fff; opacity: 0.7; }
+    .swiper-pagination-bullet-active { background: var(--laranja-divertido); opacity: 1; }
+    .swiper-button-next, .swiper-button-prev { color: #fff; }
+    @media (max-width: 768px) {
+      .slide-content h1 { font-size: 2.2rem; }
+      .slide-content p { font-size: 1rem; }
+    }
+    /* Seções */
+    section { padding: 80px 0; }
+    .faixa-confianca { background: #fff; padding: 30px 0; }
+    .confianca-cards { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+    .confianca-card {
+      background: var(--off-white); border-radius: var(--borda-arredondada); padding: 24px 28px;
+      display: flex; align-items: center; gap: 16px; box-shadow: var(--sombra-suave); min-width: 220px;
+    }
+    .confianca-card i { font-size: 2rem; color: var(--azul-piscina); }
+    .sobre-nos { background: #EFF6FC; position: relative; }
+    .sobre-wave { position: absolute; top: -2px; left: 0; width: 100%; }
+    .sobre-grid { display: flex; gap: 48px; align-items: center; flex-wrap: wrap; margin-top: 40px; }
+    .sobre-grid img { width: 45%; border-radius: var(--borda-arredondada); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .sobre-texto { flex: 1; }
+    .valores { display: flex; gap: 24px; margin-top: 32px; flex-wrap: wrap; }
+    .valor-card {
+      background: #fff; padding: 24px; border-radius: 20px; box-shadow: var(--sombra-suave);
+      transition: all 0.3s; border-left: 4px solid transparent;
+    }
+    .valor-card:hover { transform: translateY(-5px); border-left-color: var(--laranja-divertido); }
+    .categorias { background: #fff; }
+    .categorias-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 40px; }
+    .cat-card {
+      border-radius: 28px; overflow: hidden; background: #fff; box-shadow: var(--sombra-suave);
+      transition: transform 0.4s; cursor: pointer;
+    }
+    .cat-card:hover { transform: translateY(-8px); }
+    .cat-img { height: 220px; background-size: cover; background-position: center; transition: transform 0.4s; }
+    .cat-card:hover .cat-img { transform: scale(1.05); }
+    .cat-body { padding: 20px; position: relative; }
+    .cat-body h3 { margin-bottom: 8px; color: var(--azul-profundo); }
+    .vitrine { background: var(--off-white); }
+    .filtro-abas { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+    .filtro-abas button {
+      padding: 10px 20px; border-radius: 30px; border: 2px solid var(--cinza-claro);
+      background: #fff; font-weight: 600; cursor: pointer; transition: 0.3s;
+    }
+    .filtro-abas button.active { background: var(--azul-piscina); color: #fff; border-color: var(--azul-piscina); }
+    .produtos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
+    .produto-card {
+      background: #fff; border-radius: 24px; padding: 16px; box-shadow: var(--sombra-suave);
+      transition: all 0.3s; position: relative;
+    }
+    .produto-card:hover { transform: translateY(-6px); }
+    .badge { position: absolute; top: 12px; left: 12px; background: var(--verde-limao); padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+    .preco-antigo { text-decoration: line-through; color: #999; font-size: 0.9rem; }
+    .preco { font-size: 1.4rem; color: var(--laranja-divertido); font-weight: 800; }
+    .depoimentos { background: linear-gradient(135deg, var(--laranja-divertido) 0%, var(--azul-piscina) 100%); }
+    .depoimentos-grid { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 40px; }
+    .depoimento-card {
+      background: #fff; border-radius: 24px; padding: 24px; max-width: 300px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .instagram { background: #fff; }
+    .instagram-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .insta-item {
+      border-radius: 16px; overflow: hidden; position: relative; aspect-ratio: 1; background: #eee;
+      cursor: pointer;
+    }
+    .insta-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .insta-item:hover img { transform: scale(1.1); }
+    .overlay-insta {
+      position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: 0.3s;
+    }
+    .insta-item:hover .overlay-insta { opacity: 1; }
+    .equipe { background: #EFF6FC; }
+    .equipe-avatars { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+    .avatar-card { text-align: center; }
+    .avatar { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--laranja-divertido); background-size: cover; background-position: center; margin: 0 auto; }
+    .mapa-grid { display: flex; gap: 40px; flex-wrap: wrap; }
+    .mapa-grid iframe { flex: 1; min-width: 300px; height: 400px; border-radius: 24px; border: 0; }
+    .info-contato { flex: 1; }
+    .faq { background: #fff; }
+    .faq-item {
+      background: var(--off-white); border-radius: 20px; padding: 16px 24px; margin-bottom: 12px; cursor: pointer;
+      transition: all 0.3s;
+    }
+    .faq-pergunta { display: flex; justify-content: space-between; align-items: center; font-weight: 700; }
+    .faq-resposta { display: none; margin-top: 12px; color: #555; }
+    .faq-item.active .faq-resposta { display: block; }
+    .faq-item.active .faq-pergunta i { transform: rotate(45deg); }
+    .cta-final { background: var(--azul-profundo); color: #fff; text-align: center; padding: 80px 0; }
+    .newsletter-input { padding: 14px 20px; border-radius: 40px; border: none; width: 260px; max-width: 100%; margin-right: 8px; }
+    footer {
+      background: var(--cinza-escuro); color: #fff; padding: 60px 0 30px;
+    }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+    .footer-grid h4 { margin-bottom: 16px; color: var(--amarelo-sol); }
+    .footer-grid a { color: #ccc; text-decoration: none; display: block; margin-bottom: 8px; }
+    .social-icons a { font-size: 1.5rem; margin-right: 16px; color: #fff; }
+    .whatsapp-float {
+      position: fixed; bottom: 24px; right: 24px; background: #25D366; color: #fff;
+      width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; box-shadow: 0 6px 20px rgba(37,211,102,0.4); z-index: 1000; transition: 0.3s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    @media (max-width: 992px) {
+      .nav-menu { display: none; }
+      .hamburger { display: flex; }
+      .sobre-grid img { width: 100%; }
+      .mapa-grid { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+  <div class="header-container">
+    <div class="logo"><img src="https://placehold.co/180x50/FF8C42/white?text=Ki-Lojao" alt="Ki-Lojão Brinquedos"></div>
+    <ul class="nav-menu">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre Nós</a></li>
+      <li><a href="#produtos">Produtos</a></li>
+      <li><a href="#categorias">Categorias</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <a href="https://wa.me/55219xxxxxxxx?text=Ol%C3%A1%20Ki-Loj%C3%A3o!%20Quero%20comprar%20um%20brinquedo!" class="btn btn-laranja" style="display:none;">Comprar pelo WhatsApp</a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#inicio" onclick="toggleMenu()">Início</a>
+  <a href="#sobre" onclick="toggleMenu()">Sobre Nós</a>
+  <a href="#produtos" onclick="toggleMenu()">Produtos</a>
+  <a href="#categorias" onclick="toggleMenu()">Categorias</a>
+  <a href="#depoimentos" onclick="toggleMenu()">Depoimentos</a>
+  <a href="#contato" onclick="toggleMenu()">Contato</a>
+  <a href="https://wa.me/55219xxxxxxxx" class="btn btn-laranja" style="margin-top:32px;">Fale Conosco</a>
+</div>
+
+<!-- Hero Slider -->
+<section class="hero" id="inicio">
+  <div class="swiper heroSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1566140967404-b5b2e3f0b462?q=80&w=1470&auto=format&fit=crop');">
+        <div class="slide-overlay">
+          <div class="slide-content" data-swiper-parallax="-200">
+            <h1>Diversão que cabe no seu mundo</h1>
+            <p>Os melhores brinquedos do Rio de Janeiro esperam por você</p>
+            <a href="#produtos" class="btn btn-laranja" style="margin-right:12px;">Ver Produtos</a>
+            <a href="https://wa.me/55219xxxxxxxx" class="btn btn-outline">Compre Agora</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=1470&auto=format&fit=crop');">
+        <div class="slide-overlay">
+          <div class="slide-content">
+            <h1>Do clássico ao moderno, criando memórias mágicas</h1>
+            <p>Entrega rápida em todo o RJ e embalagem para presente gratuita</p>
+            <a href="https://wa.me/55219xxxxxxxx" class="btn btn-laranja">Escolher Presente</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?q=80&w=1470&auto=format&fit=crop');">
+        <div class="slide-overlay">
+          <div class="slide-content">
+            <h1>Referência em brinquedos no Rio</h1>
+            <p>Desde 2012 encantando famílias na capital e Niterói</p>
+            <a href="#contato" class="btn btn-outline">Como Chegar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>
+
+<!-- Faixa de Confiança -->
+<section class="faixa-confianca">
+  <div class="container">
+    <div class="confianca-cards" data-aos="fade-up">
+      <div class="confianca-card"><i class="fas fa-gift"></i> Embalagem para Presente Grátis</div>
+      <div class="confianca-card"><i class="fas fa-truck-fast"></i> Entrega Rápida em Todo o RJ</div>
+      <div class="confianca-card"><i class="fas fa-star"></i> 4,9 estrelas no Google</div>
+    </div>
+  </div>
+</section>
+
+<!-- Sobre Nós -->
+<section class="sobre-nos" id="sobre">
+  <svg class="sobre-wave" viewBox="0 0 1440 120"><path fill="#FFFFFF" d="M0,64L80,80C160,96,320,128,480,117.3C640,107,800,53,960,48C1120,43,1280,85,1360,106.7L1440,128L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"/></svg>
+  <div class="container" data-aos="fade-up">
+    <h2 class="titulo-display" style="text-align:center; font-size:2.5rem; color:var(--azul-profundo);">Ki‑Lojão Brinquedos e Bazar – Onde a diversão ganha vida</h2>
+    <div class="sobre-grid">
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1470&auto=format&fit=crop" alt="Equipe Ki-Lojão com crianças e brinquedos">
+      <div class="sobre-texto">
+        <p style="font-size:1.1rem; margin-bottom:16px;">
+          Nascidos no coração do Rio de Janeiro, somos a <strong>Ki‑Lojão Brinquedos e Bazar LTDA</strong>, uma empresa familiar apaixonada por criar sorrisos. Desde 2012, nossa loja é referência em brinquedos educativos, jogos criativos e artigos de bazar que alegram gerações. Cada cliente que sai daqui com um brinquedo e um sorriso é nossa maior conquista.
+        </p>
+        <p><strong>CNPJ:</strong> 16.851.613/0001-72 | <strong>Inscrição Estadual:</strong> 79.756.66-0</p>
+        <div class="valores">
+          <div class="valor-card"><i class="fas fa-star" style="color:var(--laranja-divertido);"></i> <strong>Missão:</strong> Espalhar alegria através do brincar</div>
+          <div class="valor-card"><i class="fas fa-eye" style="color:var(--laranja-divertido);"></i> <strong>Visão:</strong> Ser referência em curadoria de brinquedos inteligentes no RJ</div>
+          <div class="valor-card"><i class="fas fa-heart" style="color:var(--laranja-divertido);"></i> <strong>Valores:</strong> Segurança, criatividade e atendimento afetivo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categorias -->
+<section class="categorias" id="categorias">
+  <div class="container" data-aos="fade-up">
+    <h2 style="text-align:center; font-size:2.5rem;">Da primeira infância à pré-adolescência, curadoria perfeita</h2>
+    <div class="categorias-grid">
+      <div class="cat-card">
+        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1559715541-2b2b8a6b8b6c?q=80&w=1470&auto=format&fit=crop');"></div>
+        <div class="cat-body"><h3>Bonecos & Action Figures</h3><p>Heróis, personagens e colecionáveis.</p></div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?q=80&w=1631&auto=format&fit=crop');"></div>
+        <div class="cat-body"><h3>Jogos de Tabuleiro</h3><p>Diversão em família garantida.</p></div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=1470&auto=format&fit=crop');"></div>
+        <div class="cat-body"><h3>Brinquedos Educativos</h3><p>Kits STEM e aprendizagem lúdica.</p></div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1559622214-f8a9850965bb?q=80&w=1470&auto=format&fit=crop');"></div>
+        <div class="cat-body"><h3>Pelúcias & Bichinhos</h3><p>Fofura e aconchego para abraçar.</p></div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1596464716127-f2d829f5b8b7?q=80&w=1470&auto=format&fit=crop');"></div>
+        <div class="cat-body"><h3>Ar Livre & Esportes</h3><p>Bolas, bicicletas e muita energia.</p></div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1471&auto=format&fit=crop');"></div>
+        <div class="cat-body"><h3>Arte & Criatividade</h3><p>Pintura, slime e DIY para soltar a imaginação.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Produtos em destaque -->
+<section class="vitrine" id="produtos">
+  <div class="container" data-aos="fade-up">
+    <h2 style="text-align:center; font-size:2.5rem;">Explore nossos campeões de venda ⭐</h2>
+    <div class="filtro-abas">
+      <button class="active">0-2 anos</button>
+      <button>3-5 anos</button>
+      <button>6-8 anos</button>
+      <button>9+ anos</button>
+      <button>Promoções</button>
+    </div>
+    <div class="produtos-grid">
+      <div class="produto-card"><span class="badge">Mais Vendido</span><img src="https://placehold.co/300x200/FFC107/white?text=Brinquedo+1" style="width:100%; border-radius:16px;"><h4>Blocos de Montar 100pçs</h4><p class="preco-antigo">R$ 89,90</p><p class="preco">R$ 59,90</p><a href="https://wa.me/55219xxxxxxxx?text=Quero+comprar+Blocos+de+Montar" class="btn btn-laranja" style="width:100%; text-align:center;">Comprar via WhatsApp</a></div>
+      <div class="produto-card"><img src="https://placehold.co/300x200/A5D63E/white?text=Jogo+Tabuleiro" style="width:100%; border-radius:16px;"><h4>Jogo da Vida</h4><p class="preco">R$ 129,90</p><a href="https://wa.me/55219xxxxxxxx?text=Quero+comprar+Jogo+da+Vida" class="btn btn-laranja" style="width:100%; text-align:center;">Comprar via WhatsApp</a></div>
+      <div class="produto-card"><span class="badge">Frete Grátis</span><img src="https://placehold.co/300x200/38B6FF/white?text=Pel%C3%BAcia" style="width:100%; border-radius:16px;"><h4>Pelúcia Unicórnio</h4><p class="preco">R$ 74,90</p><a href="https://wa.me/55219xxxxxxxx?text=Quero+comprar+Pel%C3%BAcia+Unic%C3%B3rnio" class="btn btn-laranja" style="width:100%; text-align:center;">Comprar via WhatsApp</a></div>
+    </div>
+    <div style="text-align:center; margin-top:40px;"><a href="#" class="btn btn-laranja">Ver Catálogo Completo</a></div>
+  </div>
+</section>
+
+<!-- Depoimentos -->
+<section class="depoimentos" id="depoimentos">
+  <div class="container" data-aos="fade-up">
+    <h2 style="text-align:center; color:#fff; font-size:2.5rem;">Mural de Alegria</h2>
+    <div class="depoimentos-grid">
+      <div class="depoimento-card">⭐⭐⭐⭐⭐<p>"A entrega foi super rápida e o jogo fez o maior sucesso no aniversário!"</p><strong>Fernanda, Barra da Tijuca</strong></div>
+      <div class="depoimento-card">⭐⭐⭐⭐⭐<p>"Minha filha amou a pelúcia, veio embalada para presente, um capricho!"</p><strong>Rafael, Copacabana</strong></div>
+      <div class="depoimento-card">⭐⭐⭐⭐⭐<p>"Atendimento nota mil, me ajudaram a escolher o brinquedo ideal."</p><strong>Juliana, Tijuca</strong></div>
+    </div>
+    <p style="text-align:center; color:#fff; margin-top:24px;">+10.000 sorrisos entregues 🎁</p>
+  </div>
+</section>
+
+<!-- Instagram -->
+<section class="instagram">
+  <div class="container" data-aos="fade-up">
+    <h2 style="text-align:center; font-size:2rem;">Siga a gente no Instagram @kilojaorj</h2>
+    <div class="instagram-grid">
+      <div class="insta-item"><img src="https://placehold.co/300x300/FF8C42/white?text=Post+1"><div class="overlay-insta"><i class="fab fa-instagram" style="color:#fff; font-size:2rem;"></i></div></div>
+      <div class="insta-item"><img src="https://placehold.co/300x300/38B6FF/white?text=Post+2"><div class="overlay-insta"><i class="fab fa-instagram" style="color:#fff; font-size:2rem;"></i></div></div>
+      <div class="insta-item"><img src="https://placehold.co/300x300/A5D63E/white?text=Post+3"><div class="overlay-insta"><i class="fab fa-instagram" style="color:#fff; font-size:2rem;"></i></div></div>
+      <div class="insta-item"><img src="https://placehold.co/300x300/FFC107/white?text=Post+4"><div class="overlay-insta"><i class="fab fa-instagram" style="color:#fff; font-size:2rem;"></i></div></div>
+      <div class="insta-item"><img src="https://placehold.co/300x300/1A3E6F/white?text=Post+5"><div class="overlay-insta"><i class="fab fa-instagram" style="color:#fff; font-size:2rem;"></i></div></div>
+      <div class="insta-item"><img src="https://placehold.co/300x300/FF8C42/white?text=Post+6"><div class="overlay-insta"><i class="fab fa-instagram" style="color:#fff; font-size:2rem;"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Equipe -->
+<section class="equipe">
+  <div class="container" data-aos="fade-up">
+    <h2 style="text-align:center; font-size:2.5rem;">Quem cuida da diversão</h2>
+    <div class="equipe-avatars">
+      <div class="avatar-card"><div class="avatar" style="background-image: url('https://placehold.co/120x120/FF8C42/white?text=Espec.');"></div><h4>Pedagoga</h4><p>Especialista infantil</p></div>
+      <div class="avatar-card"><div class="avatar" style="background-image: url('https://placehold.co/120x120/38B6FF/white?text=Curador');"></div><h4>Curador</h4><p>Seleciona os brinquedos</p></div>
+      <div class="avatar-card"><div class="avatar" style="background-image: url('https://placehold.co/120x120/A5D63E/white?text=Gerente');"></div><h4>Gerente</h4><p>Atendimento nota 1000</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Localização e mapa -->
+<section class="mapa" id="contato">
+  <div class="container" data-aos="fade-up">
+    <h2 style="text-align:center; font-size:2.5rem;">Venha nos visitar no coração do Rio</h2>
+    <div class="mapa-grid" style="margin-top:32px;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.356788812345!2d-43.210478!3d-22.913789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x997e5c5a5a5a5a%3A0x5a5a5a5a5a5a5a5a!2sRua%20Exemplo%2C%20123%20-%20Rio%20de%20Janeiro!5e0!3m2!1spt-BR!2sbr!4v1620000000000" allowfullscreen="" loading="lazy"></iframe>
+      <div class="info-contato">
+        <p><strong>Endereço:</strong> Rua Exemplo, 123, Bairro, Rio de Janeiro – RJ, CEP 20000-000</p>
+        <p><strong>WhatsApp:</strong> (21) 9xxxx-xxxx</p>
+        <p><strong>Horários:</strong> Seg a Sáb 09h-19h, Dom 10h-14h</p>
+        <a href="https://wa.me/55219xxxxxxxx" class="btn btn-laranja" style="margin-top:16px;">Traçar rota pelo Waze</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container" data-aos="fade-up">
+    <h2 style="text-align:center; font-size:2.5rem;">Tire suas dúvidas</h2>
+    <div class="faq-item"><div class="faq-pergunta">Qual a idade recomendada?<i class="fas fa-plus"></i></div><div class="faq-resposta">Todos os nossos produtos exibem a faixa etária na descrição. Consulte a categoria por idade.</div></div>
+    <div class="faq-item"><div class="faq-pergunta">Vocês embalam para presente?<i class="fas fa-plus"></i></div><div class="faq-resposta">Sim! Embrulho gratuito com papel decorado e tag personalizada.</div></div>
+    <div class="faq-item"><div class="faq-pergunta">Entregam em Niterói?<i class="fas fa-plus"></i></div><div class="faq-resposta">Sim, atendemos todo o Grande Rio. Consulte prazos no WhatsApp.</div></div>
+    <div style="text-align:center; margin-top:24px;"><a href="https://wa.me/55219xxxxxxxx" class="btn btn-laranja">Ainda tem dúvidas? Chame no WhatsApp</a></div>
+  </div>
+</section>
+
+<!-- CTA Final -->
+<section class="cta-final">
+  <div class="container" data-aos="zoom-in">
+    <h2>Encante quem você ama. Ganhe 10% off na primeira compra!</h2>
+    <p>Use o cupom <strong>KILOJAO10</strong> no WhatsApp e aproveite.</p>
+    <form style="margin-top:24px;">
+      <input type="email" placeholder="Seu melhor e-mail" class="newsletter-input" required>
+      <button type="submit" class="btn btn-laranja">Quero meu desconto</button>
+    </form>
+  </div>
+</section>
+
+<!-- Rodapé -->
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <img src="https://placehold.co/140x40/FF8C42/white?text=Ki-Lojao" style="margin-bottom:16px;">
+      <p><strong>Ki‑Lojão Brinquedos e Bazar LTDA</strong></p>
+      <p>CNPJ: 16.851.613/0001-72</p>
+      <p>Inscrição Estadual: 79.756.66-0</p>
+    </div>
+    <div>
+      <h4>Links Úteis</h4>
+      <a href="#">Início</a><a href="#sobre">Sobre</a><a href="#produtos">Produtos</a><a href="#contato">Contato</a><a href="#">Política de Privacidade</a>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <p>Rua Exemplo, 123 – Rio de Janeiro</p>
+      <p>(21) 9xxxx-xxxx</p>
+      <p>contato@kilojaorj.com.br</p>
+    </div>
+    <div>
+      <h4>Redes Sociais</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:40px; border-top:1px solid #555; padding-top:20px;">
+    <p>© 2026 Ki‑Lojão Brinquedos e Bazar LTDA. Desenvolvido com carinho e muita diversão.</p>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/55219xxxxxxxx?text=Ol%C3%A1%20Ki-Loj%C3%A3o!%20Preciso%20de%20ajuda%20para%20escolher%20um%20brinquedo%20🧸" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+  var swiper = new Swiper(".heroSwiper", {
+    loop: true,
+    autoplay: { delay: 6000, disableOnInteraction: false },
+    speed: 1000,
+    effect: 'fade',
+    pagination: { el: ".swiper-pagination", clickable: true },
+    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+  });
+  // Header scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 80);
+  });
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('active');
+    const hamburger = document.querySelector('.hamburger');
+    hamburger.classList.toggle('active');
+  }
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => item.classList.toggle('active'));
+  });
+  // Filtro abas (simulação visual)
+  document.querySelectorAll('.filtro-abas button').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelector('.filtro-abas button.active').classList.remove('active');
+      this.classList.add('active');
+    });
+  });
+</script>
+
+<!-- Dados Estruturados Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Ki‑Lojão Brinquedos e Bazar LTDA",
+  "legalName": "Ki-Lojao Brinquedos e Bazar LTDA",
+  "taxID": "16.851.613/0001-72",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Exemplo, 123",
+    "addressLocality": "Rio de Janeiro",
+    "addressRegion": "RJ",
+    "postalCode": "20000-000"
+  },
+  "telephone": "+55219xxxxxxxx",
+  "openingHours": "Mo-Sa 09:00-19:00, Su 10:00-14:00",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "147"
+  },
+  "image": "https://placehold.co/180x50/FF8C42/white?text=Ki-Lojao",
+  "url": "https://www.kilojaorj.com.br"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Qual a idade recomendada?", "acceptedAnswer": { "@type": "Answer", "text": "Todos os produtos exibem faixa etária." } },
+    { "@type": "Question", "name": "Vocês embalam para presente?", "acceptedAnswer": { "@type": "Answer", "text": "Sim, embrulho grátis." } },
+    { "@type": "Question", "name": "Entregam em Niterói?", "acceptedAnswer": { "@type": "Answer", "text": "Sim, todo Grande Rio." } }
+  ]
+}
+</script>
+
+</body>
+</html>
